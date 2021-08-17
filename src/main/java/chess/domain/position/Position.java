@@ -1,22 +1,36 @@
 package chess.domain.position;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Position {
+
+    private final static Map<String, Position> matcher = new HashMap<>();
+
+    static {
+        for (File file : File.values()) {
+            for (Rank rank : Rank.values()) {
+                matcher.put(key(file, rank), new Position(file, rank));
+            }
+        }
+    }
+
     private final File file;
     private final Rank rank;
 
-    public Position(File file, Rank rank) {
+    public Position(final File file, final Rank rank) {
         this.file = file;
         this.rank = rank;
     }
 
-    public String getFile() {
-        return file.value();
+    public static Position of(final String input) {
+        Position position = matcher.get(input.toUpperCase());
+        return position;
     }
 
-    public int getRank() {
-        return rank.value();
+    private static String key(final File file, final Rank rank) {
+        return file.value() + rank.value();
     }
 
     @Override

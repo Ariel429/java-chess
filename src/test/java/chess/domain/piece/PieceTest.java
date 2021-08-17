@@ -15,7 +15,7 @@ class PieceTest {
     @DisplayName("Piece의 생성을 테스트한다.")
     void createTest() {
         //given
-        Piece knight = Knight.of(new Position(File.B, Rank.ONE), Player.WHITE);
+        Piece knight = Knight.of(Position.of("b1"), Player.WHITE);
 
         //when
         //then
